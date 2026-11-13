@@ -20,7 +20,7 @@ export default function Global() {
         schoolName: [crypto.randomUUID(), "School Name", ""],
         title: [crypto.randomUUID(), "Title of Study", ""],
         startDateSchool: [crypto.randomUUID(), "Start Date", ""],
-        endDate: [crypto.randomUUID(), "End Date", ""],
+        endDateSchool: [crypto.randomUUID(), "End Date", ""],
       },
     },
     experience: {

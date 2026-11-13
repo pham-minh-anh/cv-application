@@ -1,14 +1,70 @@
+import { useState } from "react";
+
 export default function Form({ fieldsValue, onSubmit }) {
-  function handleSubmit() {}
-  function handleEdit() {}
+  const [editing, setEditing] = useState(false);
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    const newFieldsValue = structuredClone(fieldsValue);
+    newFieldsValue.general.fields.name[2] = form.elements.name.value;
+    newFieldsValue.general.fields.email[2] = form.elements.email.value;
+    newFieldsValue.general.fields.phoneNumber[2] =
+      form.elements.phoneNumber.value;
+
+    newFieldsValue.education.fields.schoolName[2] =
+      form.elements.schoolName.value;
+    newFieldsValue.education.fields.title[2] = form.elements.title.value;
+    newFieldsValue.education.fields.startDateSchool[2] =
+      form.elements.startDateSchool.value;
+    newFieldsValue.education.fields.endDateSchool[2] =
+      form.elements.endDateSchool.value;
+
+    newFieldsValue.experience.fields.companyName[2] =
+      form.elements.companyName.value;
+    newFieldsValue.experience.fields.position[2] = form.elements.position.value;
+    newFieldsValue.experience.fields.responsibility[2] =
+      form.elements.responsibility.value;
+    newFieldsValue.experience.fields.startDate[2] =
+      form.elements.startDate.value;
+    newFieldsValue.experience.fields.endDate[2] = form.elements.endDate.value;
+
+    form.reset();
+    setEditing(false);
+    onSubmit(newFieldsValue);
+  }
+  function handleEdit(e) {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    form.elements.name.value = fieldsValue.general.fields.name[2];
+    form.elements.email.value = fieldsValue.general.fields.email[2];
+    form.elements.phoneNumber.value = fieldsValue.general.fields.phoneNumber[2];
+
+    form.elements.schoolName.value = fieldsValue.education.fields.schoolName[2];
+    form.elements.title.value = fieldsValue.education.fields.title[2];
+    form.elements.startDateSchool.value =
+      fieldsValue.education.fields.startDateSchool[2];
+    form.elements.endDateSchool.value =
+      fieldsValue.education.fields.endDateSchool[2];
+
+    form.elements.companyName.value =
+      fieldsValue.experience.fields.companyName[2];
+    form.elements.position.value = fieldsValue.experience.fields.position[2];
+    form.elements.responsibility.value =
+      fieldsValue.experience.fields.responsibility[2];
+    form.elements.startDate.value = fieldsValue.experience.fields.startDate[2];
+    form.elements.endDate.value = fieldsValue.experience.fields.endDate[2];
+    setEditing(true);
+  }
   return (
     <form>
       <h1>Form</h1>
       <General />
       <Education />
       <Experience />
-      <button type="submit">Submit</button>
-      <button>Edit</button>
+      <button type="submit" onClick={handleSubmit}>
+        Submit
+      </button>
+      <button onClick={handleEdit}>Edit</button>
     </form>
   );
 }
